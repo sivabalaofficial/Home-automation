@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Automation</title>
+</head>
+
+<body>
+
+<h1>🏠 Home Automation</h1>
+
+<h2>💡 Light</h2>
+<button onclick="update(1,1)">ON</button>
+<button onclick="update(1,0)">OFF</button>
+
+<h2>🌀 Fan</h2>
+<button onclick="update(2,1)">ON</button>
+<button onclick="update(2,0)">OFF</button>
+
+<script>
+
+const apiKey = "VOH4QOQPSAF6ROF0";
+
+let light = 0;
+let fan = 0;
+
+function update(device, value)
+{
+  if(device == 1) light = value;
+  if(device == 2) fan = value;
+
+  let url =
+  "https://api.thingspeak.com/update?api_key=" + apiKey +
+  "&field1=" + light +
+  "&field2=" + fan;
+
+  fetch(url)
+    .then(response => response.text())
+    .then(data => console.log(data));
+}
+
+</script>
+
+</body>
+</html>
